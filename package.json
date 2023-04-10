@@ -1,0 +1,22 @@
+{
+  "name": "us",
+  "version": "1.0.0",
+  "description": "",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "nodemon ./backend/server.js"
+  },
+  "author": "Ram",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.2.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-handler": "^1.2.0",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "socket.io": "^4.6.1"
+  }
+}

@@ -19,7 +19,7 @@ import ScrollableChat from "./ScrollableChat";
 import io from "socket.io-client";
 import animationData from "../animations/typing.json";
 import Lottie from "react-lottie";
-const ENDPOINT = "https://holachat.onrender.com/";
+const ENDPOINT = "https://holaachat.onrender.com/";
 var socket, selectedChatCompare;
 const SingleChat = ({ fetchAgain, setfetchAgain }) => {
   const [messages, setmessages] = useState([]);

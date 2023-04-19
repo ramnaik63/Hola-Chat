@@ -10,8 +10,8 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useState } from "react";
-import axios from 'axios';
-import {useHistory} from 'react-router-dom';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 const Signup = () => {
   const [name, setname] = useState();
   const [email, setemail] = useState();
@@ -38,26 +38,26 @@ const Signup = () => {
       });
       return;
     }
-    if (pics.type==="image/jpeg" || pics.type === "image/png") {
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
-      data.append('file',pics);
-      data.append('upload_preset','chat-app');
-      data.append('cloud_name', 'dxeysmkn7');
-      fetch('https://api.cloudinary.com/v1_1/dxeysmkn7/image/upload',{
-        method: 'post',
-        body: data
-      }).then((res)=> res.json()).then((data)=> {
-        setpic(data.url.toString());
-        console.log(data.url.toString());
-        setloading(false);
+      data.append("file", pics);
+      data.append("upload_preset", "chat-app");
+      data.append("cloud_name", "dxeysmkn7");
+      fetch("https://api.cloudinary.com/v1_1/dxeysmkn7/image/upload", {
+        method: "post",
+        body: data,
       })
-      .catch((err)=>{
-        console.log(err);
-        setloading(false);
-      })
-      
-    }
-    else{
+        .then((res) => res.json())
+        .then((data) => {
+          setpic(data.url.toString());
+          console.log(data.url.toString());
+          setloading(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setloading(false);
+        });
+    } else {
       toast({
         title: "Please Select an image",
 
@@ -83,6 +83,22 @@ const Signup = () => {
       setloading(false);
       return;
     }
+    if (
+      passwordStrength(password).value != "Strong" ||
+      passwordStrength(password).value != "Medium"
+    ) {
+      setloading(true);
+      toast({
+        title: "Enter a strong password",
+
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setloading(false);
+      return;
+    }
     if (password !== confirmpassword) {
       setloading(true);
       toast({
@@ -97,14 +113,18 @@ const Signup = () => {
       return;
     }
 
-    try{
+    try {
       const config = {
-        headers:{
-          'Content-type': 'application/json',
+        headers: {
+          "Content-type": "application/json",
         },
       };
 
-      const {data} = await axios.post('/api/user', {name , email,password ,pic},config);
+      const { data } = await axios.post(
+        "/api/user",
+        { name, email, password, pic },
+        config
+      );
       toast({
         title: "Registeration successful",
 
@@ -114,21 +134,19 @@ const Signup = () => {
         position: "bottom",
       });
 
-      localStorage.setItem('userInfo', JSON.stringify(data))
-      setloading(false)
-      history.push('/chats');
-    }
-    catch(error){
+      localStorage.setItem("userInfo", JSON.stringify(data));
+      setloading(false);
+      history.push("/chats");
+    } catch (error) {
       toast({
         title: "Error occured",
-        description: error.response.data.message ,
+        description: error.response.data.message,
         status: "error",
         duration: 5000,
         isClosable: true,
         position: "bottom",
       });
       setloading(false);
-
     }
   };
   return (

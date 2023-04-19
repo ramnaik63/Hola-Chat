@@ -9,7 +9,7 @@ import {
   TabPanel,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { useHistory } from "react-router-dom";
 import Login from "../components/authentication/Login";
 import Signup from "../components/authentication/Signup";
 
@@ -19,7 +19,7 @@ const Home = () => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
     if (user) {
-      history.push("/");
+      history.push("/chats");
     }
   }, [history]);
   return (

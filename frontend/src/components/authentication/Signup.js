@@ -12,6 +12,7 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+
 const Signup = () => {
   const [name, setname] = useState();
   const [email, setemail] = useState();
@@ -83,22 +84,7 @@ const Signup = () => {
       setloading(false);
       return;
     }
-    if (
-      passwordStrength(password).value != "Strong" ||
-      passwordStrength(password).value != "Medium"
-    ) {
-      setloading(true);
-      toast({
-        title: "Enter a strong password",
 
-        status: "warning",
-        duration: 5000,
-        isClosable: true,
-        position: "bottom",
-      });
-      setloading(false);
-      return;
-    }
     if (password !== confirmpassword) {
       setloading(true);
       toast({

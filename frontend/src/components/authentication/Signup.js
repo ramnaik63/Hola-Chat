@@ -103,7 +103,7 @@ const Signup = () => {
       setloading(false);
       return;
     }
-    if (isAlphanumeric(String(password))) {
+    if (!isAlphanumeric(String(password))) {
       toast({
         title: "Enter a alphanumeric password",
 

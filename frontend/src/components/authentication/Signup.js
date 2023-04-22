@@ -70,6 +70,11 @@ const Signup = () => {
       setloading(false);
     }
   };
+  function isAlphanumeric(str) {
+    let regex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]+$/;
+    return regex.test(str);
+  }
+
   const submitHandler = async () => {
     setloading(true);
     if (!name || !email || !password || !confirmpassword) {
@@ -89,6 +94,18 @@ const Signup = () => {
       setloading(true);
       toast({
         title: "Passwords do not match",
+
+        status: "warning",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom",
+      });
+      setloading(false);
+      return;
+    }
+    if (isAlphanumeric(String(password))) {
+      toast({
+        title: "Enter a alphanumeric password",
 
         status: "warning",
         duration: 5000,
